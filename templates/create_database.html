@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Create a New Database</h2>
+{% if error %}
+    <p style="color:red;">Error: {{ error }}</p>
+{% endif %}
+<form action="/create_database" method="post">
+    <label for="db_name">Database Name:</label><br>
+    <input type="text" id="db_name" name="db_name" required><br><br>
+    <button type="submit">Create Database</button>
+</form>
+{% endblock %}

@@ -1,0 +1,13 @@
+<!-- templates/edit_database.html -->
+{% extends "base.html" %}
+{% block content %}
+<h2>Edit Database '{{ db.name }}'</h2>
+{% if error %}
+    <p style="color:red;">Error: {{ error }}</p>
+{% endif %}
+<form action="/databases/{{ db.name }}/edit_database" method="post">
+    <label for="new_db_name">Database Name:</label><br>
+    <input type="text" id="new_db_name" name="new_db_name" value="{{ db.name }}" required><br><br>
+    <button type="submit">Update Database</button>
+</form>
+{% endblock %}

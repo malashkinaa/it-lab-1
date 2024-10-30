@@ -1,0 +1,15 @@
+<!-- templates/edit_table.html -->
+{% extends "base.html" %}
+{% block content %}
+<h2>Edit Table '{{ table.name }}' in Database '{{ db_name }}'</h2>
+{% if error %}
+    <p style="color:red;">Error: {{ error }}</p>
+{% endif %}
+<form action="/databases/{{ db_name }}/tables/{{ table.name }}/edit_table" method="post">
+    <label for="new_table_name">Table Name:</label><br>
+    <input type="text" id="new_table_name" name="new_table_name" value="{{ table.name }}" required><br><br>
+    <label for="attributes">Attributes (format: name:type, separated by commas):</label><br>
+    <input type="text" id="attributes" name="attributes" value="{{ attributes }}" required><br><br>
+    <button type="submit">Update Table</button>
+</form>
+{% endblock %}

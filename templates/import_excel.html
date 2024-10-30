@@ -1,0 +1,40 @@
+<!-- templates/import_excel.html -->
+
+{% extends "base.html" %}
+{% block content %}
+    <h1>Import Excel to Table: {{ table_name }}</h1>
+
+    {% if error %}
+        <div class="error-messages">
+            <h2 style="color:red;">Error:</h2>
+            <p>{{ error|safe }}</p>
+        </div>
+    {% endif %}
+
+    {% if errors %}
+        <div class="error-messages">
+            <h2 style="color:red;">Import Errors:</h2>
+            <ul>
+                {% for err in errors %}
+                    <li>{{ err }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% if inserted_rows %}
+        <div class="success-message">
+            <h2 style="color:green;">Success!</h2>
+            <p>Successfully inserted {{ inserted_rows }} row{{ inserted_rows != 1 and 's' or '' }} into the table.</p>
+        </div>
+    {% endif %}
+
+    <form action="/databases/{{ db_name }}/tables/{{ table_name }}/import_excel" method="post" enctype="multipart/form-data">
+        <label for="file">Select Excel file (.xlsx or .xls):</label><br><br>
+        <input type="file" id="file" name="file" accept=".xlsx, .xls" required><br><br>
+        <button type="submit">Import</button>
+    </form>
+
+    <br>
+    <a href="/databases/{{ db_name }}/tables/{{ table_name }}">Back to Table</a>
+{% endblock %}

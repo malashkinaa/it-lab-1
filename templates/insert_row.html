@@ -1,0 +1,17 @@
+<!-- templates/insert_row.html -->
+{% extends "base.html" %}
+{% block content %}
+<h2>Insert a New Row into {{ table.name }}</h2>
+<form action="/databases/{{ db_name }}/tables/{{ table.name }}/insert_row" method="post">
+    {% for attr in table.schema.attributes %}
+        <label for="{{ attr.name }}">{{ attr.name }} ({{ attr.data_type }}):</label><br>
+        <input type="text" id="{{ attr.name }}" name="{{ attr.name }}"
+               value="{{ form_data.get(attr.name, '') if form_data else '' }}" required><br>
+        {% if errors and errors.get(attr.name) %}
+            <p style="color:red;">{{ errors.get(attr.name) }}</p>
+        {% endif %}
+        <br>
+    {% endfor %}
+    <button type="submit">Insert Row</button>
+</form>
+{% endblock %}

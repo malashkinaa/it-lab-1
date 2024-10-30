@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Create a New Table in Database '{{ db_name }}'</h2>
+{% if error %}
+    <p style="color:red;">Error: {{ error }}</p>
+{% endif %}
+<form action="/databases/{{ db_name }}/create_table" method="post">
+    <label for="table_name">Table Name:</label><br>
+    <input type="text" id="table_name" name="table_name" required><br><br>
+    <label for="attributes">Attributes (format: name:type, separated by commas):</label><br>
+    <input type="text" id="attributes" name="attributes" placeholder="id:integer,name:string,age:integer" required><br><br>
+    <button type="submit">Create Table</button>
+</form>
+{% endblock %}

@@ -1,0 +1,19 @@
+<!-- templates/database.html -->
+{% extends "base.html" %}
+{% block content %}
+<h2>Database: {{ db.name }}</h2>
+<a href="/databases/{{ db.name }}/create_table">Create New Table</a>
+{% if db.tables %}
+    <ul>
+        {% for table_name in db.tables.keys() %}
+            <li>
+                <a href="/databases/{{ db.name }}/tables/{{ table_name }}">{{ table_name }}</a>
+                | <a href="/databases/{{ db.name }}/tables/{{ table_name }}/edit_table">Edit</a>
+                | <a href="/databases/{{ db.name }}/tables/{{ table_name }}/delete_table" onclick="return confirm('Are you sure you want to delete this table?');">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No tables found.</p>
+{% endif %}
+{% endblock %}
