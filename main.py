@@ -251,7 +251,13 @@ async def post_insert_row(request: Request, db_name: str, table_name: str):
     for attr in table.schema.attributes:
         value = form_data.get(attr.name)
         try:
-            parsed_value = parse_data(value, attr.data_type)
+            if attr.data_type == "file":
+                content = await value.read()
+                filename = value.filename
+                content_type = value.content_type
+                parsed_value = parse_data(content, attr.data_type)
+            else:
+                parsed_value = parse_data(value, attr.data_type)
             parsed_data[attr.name] = parsed_value
         except ValueError as e:
             errors[attr.name] = str(e)

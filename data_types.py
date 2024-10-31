@@ -2,7 +2,7 @@
 import datetime
 import os
 
-SUPPORTED_DATA_TYPES = {'int','str','integer', 'real', 'char', 'string', 'date', 'int_interval'}
+SUPPORTED_DATA_TYPES = {'int','str','integer', 'real', 'char', 'string', 'date', 'int_interval', 'file'}
 
 # data_types.py
 
@@ -21,6 +21,8 @@ def parse_data(value, data_type):
             else:
                 raise ValueError("Char must be a single character.")
         elif data_type == 'string' or data_type == 'str':
+            return str(value)
+        elif data_type == 'file':
             return str(value)
         elif data_type == 'date':
             if isinstance(value, datetime.date):
