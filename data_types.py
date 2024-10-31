@@ -1,5 +1,6 @@
 # data_types.py
 import datetime
+import os
 
 SUPPORTED_DATA_TYPES = {'int','str','integer', 'real', 'char', 'string', 'date', 'int_interval'}
 
@@ -58,7 +59,12 @@ def parse_data(value, data_type):
         raise ValueError(f"Error parsing value '{value}' as {data_type}: {e}")
     finally:
         pass
-
+    
+# def parse_text_file(file_path):
+#     if not os.path.isfile(file_path):
+#         raise ValueError(f"File does not exist: {file_path}.")
+#     with open(file_path, 'r', encoding='utf-8') as file:
+#         return file.read()
 
 def validate_data(value, data_type):
     try:

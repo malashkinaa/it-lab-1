@@ -3,21 +3,21 @@
 {% extends "base.html" %} {% block content %} {% if error %}
 <p style="color: red">Error: {{ error }}</p>
 {% else %}
-<h2>Table: {{ table.name }}</h2>
+<h2>Таблиця: {{ table.name }}</h2>
 <a href="/databases/{{ db_name }}/tables/{{ table.name }}/insert_row"
-  >Insert New Row</a
+  >Вставити новий рядок</a
 >
 |
 <a href="/databases/{{ db_name }}/tables/{{ table.name }}/export"
-  >Export to Excel</a
+  >Експорт в Excel</a
 >
 |
 <a href="/databases/{{ db_name }}/tables/{{ table.name }}/import_excel"
-  >Import from Excel</a
+  >Імпорт з Excel</a
 >
 |
 <a href="/databases/{{ db_name }}/tables/{{ table.name }}/delete_duplicate_rows"
-  >Delete duplicate rows</a
+  >Видалити повторювані рядки</a
 >
 {% if table.rows %}
 <table border="1">

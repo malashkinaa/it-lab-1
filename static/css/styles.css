@@ -1,50 +1,93 @@
-/* static/css/styles.css */
 body {
   font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 20px;
+  margin: 50;
+  padding: 70;
+  background-color: #f4f4f9;
+  color: #333;
 }
 
 header {
-  background-color: #f8f8f8;
-  padding: 10px 20px;
-  margin-bottom: 20px;
+  background-color: #ffffff;
+  padding: 15px 20px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #ff6700;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 header h1 {
-  display: inline-block;
+  font-size: 1.8em;
+  color: #333;
   margin: 0;
 }
 
 header nav {
-  display: inline-block;
-  margin-left: 20px;
+  display: flex;
+  gap: 15px;
 }
 
 header nav a {
-  margin-right: 10px;
   text-decoration: none;
-  color: #333;
+  color: #ff6700;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+header nav a:hover {
+  color: #e05c00;
 }
 
 main h2 {
+  font-size: 1.6em;
+  color: #333;
+  text-align: center;
   margin-top: 0;
 }
 
 table {
-  width: 100%;
+  width: 90%;
+  max-width: 800px;
   border-collapse: collapse;
-  margin-top: 10px;
+  margin: 20px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  border-radius: 8px;
 }
 
-table,
-th,
-td {
-  border: 1px solid #ddd;
-}
-
-th,
-td {
-  padding: 8px;
+table th,
+table td {
+  padding: 12px 15px;
   text-align: left;
+}
+
+table th {
+  background-color: #ff6700;
+  color: #fff;
+  font-weight: bold;
+}
+
+table tr:nth-child(even) {
+  background-color: #f9f9fc;
+}
+
+table tr:hover {
+  background-color: #ffe8d1;
+}
+
+button,
+.link {
+  background-color: #ff6700;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  text-decoration: none;
+}
+
+button:hover,
+.link:hover {
+  background-color: #e05c00;
 }

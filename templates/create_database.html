@@ -1,12 +1,11 @@
-{% extends "base.html" %}
-{% block content %}
-<h2>Create a New Database</h2>
+{% extends "base.html" %} {% block content %}
+<h2>Створити нову базу даних</h2>
 {% if error %}
-    <p style="color:red;">Error: {{ error }}</p>
+<p style="color: red">Error: {{ error }}</p>
 {% endif %}
 <form action="/create_database" method="post">
-    <label for="db_name">Database Name:</label><br>
-    <input type="text" id="db_name" name="db_name" required><br><br>
-    <button type="submit">Create Database</button>
+  <label for="db_name">Назва бази даних:</label><br />
+  <input type="text" id="db_name" name="db_name" required /><br /><br />
+  <button type="submit">Створити базу даних</button>
 </form>
 {% endblock %}
