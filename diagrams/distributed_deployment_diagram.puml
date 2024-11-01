@@ -1,0 +1,25 @@
+@startuml
+
+node "User Device" {
+    [Browser]
+}
+
+node "Web Server" {
+    [FastAPI Application]
+}
+
+node "Database Server" {
+    [PostgreSQL Database]
+}
+
+node "File Server" {
+    [Uploaded Files]
+    [Excel Files]
+}
+
+[Browser] --> [FastAPI Application] : HTTP Requests
+[FastAPI Application] --> [PostgreSQL Database] : SQL Queries
+[FastAPI Application] --> [Uploaded Files] : File Uploads
+[FastAPI Application] --> [Excel Files] : File Access
+
+@enduml

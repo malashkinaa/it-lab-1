@@ -1,0 +1,44 @@
+@startuml
+
+start
+
+:User starts application;
+:User chooses to create a new database;
+
+:Display form to create database;
+:User enters database name;
+:Database is created;
+:Show success message;
+
+:User opens the created database;
+:User creates a table;
+
+if (Action is Insert Row?) then
+    :Display form to insert row;
+    :User fills row data;
+    if (User uploads file?) then
+        :File is uploaded and attached to the row;
+    endif
+    :Row is inserted into the table;
+    :Show success message;
+else
+    if (Action is Edit Row?) then
+        :Display form to edit row;
+        :User modifies row data;
+        if (User uploads file?) then
+            :File is uploaded and attached to the row;
+        endif
+        :Row is updated in the table;
+        :Show success message;
+    else
+        if (Action is Delete Duplicate Rows?) then
+            :System identifies duplicate rows;
+            :Duplicate rows are deleted;
+            :Show success message;
+        endif
+    endif
+endif
+
+stop
+
+@enduml

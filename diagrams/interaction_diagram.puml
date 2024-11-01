@@ -1,0 +1,57 @@
+@startuml
+
+actor User
+
+participant "Main Form" as MainForm
+participant "DB Manager" as DBManager
+participant "Drive Manager" as DriveManager
+participant "Table" as Table
+
+User -> MainForm: Choose "Create Database"
+MainForm -> MainForm: Display form to enter database name
+User -> MainForm: Enters database name
+MainForm -> DBManager: create_database(db_name)
+DBManager -> DBManager: Database created
+DBManager --> MainForm: Database created successfully
+MainForm -> User: Show success message
+
+User -> MainForm: Choose "Create Table"
+MainForm -> MainForm: Display form to define table structure
+User -> MainForm: Enters table name and columns
+MainForm -> DBManager: create_table(table_name, columns)
+DBManager -> DBManager: Table created
+DBManager --> MainForm: Table created successfully
+MainForm -> User: Show success message
+
+User -> MainForm: Choose "Insert Row"
+MainForm -> MainForm: Display form to enter row data
+User -> MainForm: Enters data and uploads file
+MainForm -> DBManager: create_row(row_data)
+DBManager -> DriveManager: save_file(file)
+DriveManager --> DBManager: file_path
+DBManager -> Table: insert(row_data, file_path)
+Table --> DBManager: Success
+DBManager --> MainForm: Row created successfully
+MainForm -> User: Show success message
+
+User -> MainForm: Choose "Edit Row"
+MainForm -> MainForm: Display form to edit row
+User -> MainForm: Modifies data and uploads new file
+MainForm -> DBManager: update_row(row_id, new_data)
+DBManager -> DriveManager: save_file(new_file)
+DriveManager --> DBManager: new_file_path
+DBManager -> Table: update(row_id, new_data, new_file_path)
+Table --> DBManager: Success
+DBManager --> MainForm: Row updated successfully
+MainForm -> User: Show success message
+
+User -> MainForm: Choose "Delete Duplicate Rows"
+MainForm -> DBManager: find_duplicates()
+DBManager -> Table: identify_duplicate_rows()
+Table --> DBManager: duplicate_rows
+DBManager -> Table: delete(duplicate_rows)
+Table --> DBManager: Duplicates deleted
+DBManager --> MainForm: Duplicates removed successfully
+MainForm -> User: Show success message
+
+@enduml
