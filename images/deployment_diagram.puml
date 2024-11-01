@@ -1,0 +1,48 @@
+@startuml
+
+node "User Device" {
+    [Browser]
+}
+
+node "Web Server" {
+    component "FastAPI Application" {
+        [main.py]
+        [database.py]
+        [operations.py]
+        [row.py]
+        [table.py]
+        [schema.py]
+        [data_types.py]
+        [attributes.py]
+    }
+    
+    folder "Templates" {
+        [base.html]
+        [create_database.html]
+        [create_table.html]
+        [edit_database.html]
+        [edit_row.html]
+        [edit_table.html]
+        [import_excel.html]
+        [index.html]
+        [insert_row.html]
+        [view_table.html]
+    }
+    
+    folder "Static Files"
+}
+
+node "Database Server" {
+    [Database]
+}
+
+node "File Storage" {
+    [Uploads]
+    [Excel Files]
+}
+
+[Browser] --> "FastAPI Application": HTTP Requests
+"FastAPI Application" --> [Database]: SQL Queries
+"FastAPI Application" --> [File Storage]: File Uploads/Downloads
+
+@enduml

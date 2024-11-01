@@ -1,0 +1,118 @@
+@startuml
+
+class Database {
+    - filePath: String
+    - tables: HashMap<String, String>
+    
+    + Database(String filePath)
+    + selfFill(String value)
+    + createTable(String name, Collection<Column> columns)
+    + removeTable(String name)
+    + save()
+    + getTableColumns(String name): Collection<Column>
+    + getTableNames(): Collection<String>
+    + query(String queryMessage): Result
+    + parsePredicate(String expr): Predicate<Row>
+    + parseValues(String expr): ArrayList<String>
+}
+
+class Table {
+    - name: String
+    - rows: List<Row>
+    - columns: Map<String, Column>
+    
+    + Table(String name, Collection<Column> columns)
+    + insert(Map<String, String> values)
+    + update(Map<String, String> values, Predicate<Row> predicate)
+    + delete(Predicate<Row> predicate)
+    ' + select(Collection<Column> columns, Predicate<Row> predicate): Collection<Row>
+    ' + getColumn(String name): Column
+    ' + getColumns(): Collection<Column>
+    + deleteDuplicateRows(): Collection<Row>
+}
+
+class Row {
+    - elements: Map<String, Element>
+    
+    + Row(Collection<Element> elements)
+    + getElement(String columnName): Element
+    + getElements(): Collection<Element>
+    + validate(Table table)
+}
+
+class Column {
+    + Type: enum
+    - type: Type
+    - name: String
+    
+    + Column(Type type, String name)
+    + getType(): Type
+    + setType(Type type)
+    + getName(): String
+    + setName(String name)
+}
+
+class Element {
+    - value: String
+    - column: String
+    
+    + Element(String value, String column)
+    + getAsInteger(): Integer
+    + getAsFloat(): Float
+    + getAsCharacter(): Character
+    + getAsString(): String
+    + getAsEmail(): String
+    + getAsHelperEnum(): HelperEnum
+}
+
+enum Type {
+    INT
+    FLOAT
+    CHAR
+    STR
+    EMAIL
+    ENUM
+}
+
+class Result {
+    - status: Status
+    - report: String
+    - rows: Collection<Row>
+    
+    + Result(Status status)
+    + getStatus(): Status
+    + getReport(): String
+    + setReport(String report)
+}
+
+enum Status {
+    OK
+    Fail
+}
+
+enum QueryRegex {
+    DELETE_ROWS
+    INSERT_ROW
+    UPDATE_ROWS
+    SELECT_ROWS
+    CREATE_TABLE
+    REMOVE_TABLE
+    LIST_TABLES
+    DELETE_DUPLICATE_ROWS
+}
+
+' class HelperEnum {
+'     - enums: Map<String, Integer>
+    
+'     + HelperEnum(ArrayList<String> keys, ArrayList<Integer> values)
+' }
+
+Database "1" -- "1..*" Table
+Table "1" -- "1..*" Row
+Table "1" -- "1..*" Column
+Row "0..*" -- "1" Element
+Column "1" -- "1" Type
+Result "1" -- "1" Status
+Element "1" -- "1" HelperEnum
+
+@enduml

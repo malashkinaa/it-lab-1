@@ -1,0 +1,26 @@
+@startuml
+
+actor User
+
+rectangle "Database Application" {
+    User --> (Create Database)
+    User --> (Create Table)
+    User --> (Insert Row)
+    User --> (Edit Row)
+    User --> (View Table)
+    User --> (Import Excel File)
+    User --> (Export Table to Excel)
+    User --> (Delete Duplicate Rows)
+    User --> (Upload File when Creating/Editing Row)
+}
+
+' Additional relationships
+(Create Table) .> (Create Database) : extends
+(Insert Row) .> (Create Table) : depends on
+(Edit Row) .> (Insert Row) : depends on
+(Export Table to Excel) .> (View Table) : depends on
+(Delete Duplicate Rows) .> (View Table) : depends on
+(Upload File when Creating/Editing Row) .> (Insert Row) : extends
+(Upload File when Creating/Editing Row) .> (Edit Row) : extends
+
+@enduml
